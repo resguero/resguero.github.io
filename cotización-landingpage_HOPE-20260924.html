@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta de desarrollo: Landing page Programa HOPE</title>
+  <style>
+    :root {
+      --hope-azul: #1B4F72;
+      --hope-verde: #27AE60;
+      --gris-claro: #F8F9FA;
+      --gris-medio: #6C757D;
+      --gris-oscuro: #343A40;
+      --blanco: #FFFFFF;
+      --amarillo-marcador: #FFF3CD;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ol, ul {
+      padding-left: 22px;
+      margin: 6px 0 10px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    th.nowrap, td.nowrap {
+      white-space: nowrap;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--gris-oscuro);
+      background-color: var(--blanco);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 16px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--hope-azul);
+      margin-bottom: 0.5em;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      border-bottom: 3px solid var(--hope-verde);
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.4em;
+      margin-top: 1.5em;
+      border-left: 4px solid var(--hope-verde);
+      padding-left: 10px;
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--hope-azul);
+    }
+
+    .header-kicker {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--hope-verde);
+      margin-bottom: 4px;
+    }
+
+    .header-cliente {
+      text-align: center;
+      padding: 12px 16px;
+      border: 1px dashed #c9d3dc;
+      border-radius: 6px;
+      min-width: 180px;
+      background-color: #fafbfc;
+    }
+
+    .header-cliente-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gris-medio);
+      margin-bottom: 6px;
+    }
+
+    .header-cliente-nombre {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--hope-azul);
+      margin-top: 6px;
+    }
+
+    .header-cliente-nombre span {
+      font-weight: 400;
+      color: var(--gris-oscuro);
+    }
+
+    .header-logo {
+      max-width: 110px;
+      height: auto;
+      opacity: 0.9;
+    }
+
+    .header-info {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .meta-info {
+      background-color: var(--gris-claro);
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .meta-info p {
+      margin-bottom: 5px;
+    }
+
+    .meta-info strong {
+      color: var(--hope-azul);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 0.95em;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--hope-azul);
+      color: var(--blanco);
+    }
+
+    tr:nth-child(odd) {
+      background-color: var(--blanco);
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--gris-claro);
+    }
+
+    .tabla-responsive {
+      overflow-x: auto;
+    }
+
+    .incluye-base {
+      background-color: var(--gris-claro);
+      border-left: 4px solid var(--hope-verde);
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .incluye-base h3 {
+      margin-top: 0;
+      color: var(--hope-verde);
+    }
+
+    .incluye-base ul {
+      margin-left: 20px;
+    }
+
+    .incluye-base li {
+      margin-bottom: 8px;
+    }
+
+    .precio-final {
+      font-weight: bold;
+      color: var(--hope-verde);
+    }
+
+    .tarjeta-evento {
+      background-color: var(--gris-claro);
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+
+    .tarjeta-evento h4 {
+      margin-top: 0;
+      color: var(--hope-verde);
+    }
+
+    .tarjeta-evento ul {
+      margin-left: 20px;
+    }
+
+    .nivel-evento {
+      background-color: var(--blanco);
+      border: 2px solid var(--hope-azul);
+      border-radius: 5px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+
+    .nivel-evento h3 {
+      color: var(--hope-azul);
+      margin-top: 0;
+    }
+
+    .nota-tecnica {
+      background-color: #E8F4FD;
+      border-left: 4px solid var(--hope-azul);
+      padding: 10px 15px;
+      margin: 10px 0;
+      font-size: 0.9em;
+    }
+
+    .nota-advertencia {
+      background-color: #FFF3CD;
+      border-left: 4px solid #FFC107;
+      padding: 10px 15px;
+      margin: 10px 0;
+      font-size: 0.9em;
+    }
+
+    .condiciones ul {
+      margin-left: 20px;
+    }
+
+    .condiciones li {
+      margin-bottom: 8px;
+    }
+
+    .seccion {
+      margin-bottom: 25px;
+    }
+
+    .firma {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid var(--hope-azul);
+    }
+
+    .marcador {
+      background-color: var(--amarillo-marcador);
+      padding: 2px 4px;
+      border-radius: 3px;
+      color: var(--hope-azul);
+    }
+
+    .fila-total {
+      background-color: var(--gris-claro) !important;
+    }
+
+    .fila-total td {
+      color: var(--hope-azul);
+      font-weight: bold;
+    }
+
+    .nivel-evento ul {
+      margin-left: 20px;
+      padding-left: 10px;
+    }
+
+    .fallback-mensaje {
+      color: var(--hope-azul);
+      font-style: italic;
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 14mm 14mm;
+      }
+
+      body {
+        padding: 0;
+        max-width: none;
+        font-size: 10.5pt;
+        line-height: 1.45;
+      }
+
+      .seccion {
+        margin-bottom: 14px;
+      }
+
+      h2 {
+        margin-top: 14px;
+      }
+
+      table {
+        font-size: 9.5pt;
+      }
+
+      td, th {
+        padding: 6px 8px;
+      }
+
+      table, tr {
+        page-break-inside: avoid;
+      }
+
+      .tarjeta-evento, .nivel-evento, .incluye-base, .nota-tecnica, .nota-advertencia {
+        page-break-inside: avoid;
+      }
+
+      .header, figure {
+        page-break-inside: avoid;
+      }
+
+      h2, h3 {
+        page-break-after: avoid;
+      }
+
+      .intro-tabla {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .header-logo {
+        max-width: 120px;
+      }
+
+      table {
+        font-size: 0.85em;
+      }
+
+      th, td {
+        padding: 6px;
+      }
+    }
+  
+    .col-centro {
+      text-align: center;
+    }
+
+    .col-derecha {
+      text-align: right;
+    }
+
+    h3 {
+      margin-top: 18px;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      color: var(--hope-azul);
+    }
+</style>
+</head>
+<body>
+
+<!-- ===== DATOS EDITABLES ===== -->
+<script>
+// Datos del documento. Los valores de este bloque se insertan
+// automaticamente en el texto de la propuesta.
+const DATOS = {
+  fecha: "24 de septiembre de 2026",
+  cifraBase: "$ 1.100.000",
+  cifraNivelB: "$ 300.000",
+  cifraNivelC: "$ 450.000",
+  cifraExtra1: "$ 200.000",
+  cifraExtra2: "$ 250.000",
+  totalNivelB: "$ 1.850.000",
+  totalNivelC: "$ 2.000.000",
+  nombreFreelancer: "Sergio Guerrero",
+  correo: "shguerreror@gmail.com",
+  telefono: "+573183040097"
+};
+</script>
+<!-- ===== FIN DATOS EDITABLES ===== -->
+
+<!-- ENCABEZADO -->
+<header class="header">
+  <div class="header-info">
+    <p class="header-kicker">Propuesta comercial · Desarrollo web</p>
+    <h1>Propuesta de desarrollo: Landing page Programa HOPE</h1>
+    <p><strong>Fecha:</strong> <span data-campo="fecha" class="marcador">[FECHA ACTUAL]</span></p>
+    <p><strong>Validez:</strong> 30 días calendario</p>
+  </div>
+  <div class="header-cliente">
+    <p class="header-cliente-label">Preparada para</p>
+    <img src="data:image/jpeg;base64,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" alt="Logo del cliente: Programa HOPE" class="header-logo">
+    <p class="header-cliente-nombre">Programa HOPE<br><span>Mateo González Agudelo</span></p>
+  </div>
+</header>
+
+<div class="meta-info">
+  <p><em>Gracias por la confianza en este proyecto. A continuación presento la propuesta para el desarrollo de la página web del Programa HOPE.</em></p>
+</div>
+
+<!-- 1. ENTENDIMIENTO DEL PROYECTO -->
+<section class="seccion">
+  <h2>1. Entendimiento del proyecto</h2>
+  <p>El Programa HOPE - Programa Integral de Atención al Personal Aeronáutico - brinda acompañamiento biopsicosocial al personal de aviación y sus familias. Su misión une la seguridad operacional con el bienestar emocional a través de líneas de atención, apoyo entre pares y eventos de formación.</p>
+  <p>La página web será el punto de entrada digital: informará sobre las líneas de atención, presentará al equipo, permitirá inscribirse a eventos, dará acceso inmediato a la Línea HOPE desde cualquier punto de la página y reforzará la confidencialidad que distingue al programa.</p>
+
+  <h3>1.1 Supuestos</h3>
+  <div class="tarjeta-evento">
+  <ol>
+    <li>HOPE entrega todos los textos, fotografías, infografías y logo (idealmente en formato vectorial).</li>
+    <li>HOPE contrata un plan de hosting Linux básico con cPanel en Colombia Hosting (el mismo proveedor donde tiene el dominio). El costo del hosting lo paga HOPE directamente al proveedor y no está incluido en esta cotización; el freelancer guía la contratación y hace la publicación.</li>
+    <li>La inscripción a eventos se gestiona con Microsoft Forms: cada evento tiene un botón que lleva al formulario correspondiente (no se desarrolla formulario propio ni base de datos).</li>
+    <li>El sitio consta de cuatro páginas, todas solo en español: la principal (8 secciones, con botones flotantes de WhatsApp y crisis), la de eventos <code>eventos.html</code>, y dos páginas legales: Aviso de Privacidad y si existen, Términos y Condiciones; no incluye blog, área privada ni portal para pilotos.</li>
+    <li>Para el Aviso de Privacidad y los Términos y Condiciones, los textos se redactan con base en la Ley 1581 de 2012 y el Artículo 50 del Estatuto del Consumidor; recomiendo que HOPE los valide con su asesor legal antes de publicarlos, ya que no reemplazan una asesoría jurídica.</li>
+    <li><strong>Nota técnica:</strong> un CMS basado en Git (como Decap o Netlify CMS) no aplica sobre cPanel. Por eso el Nivel B usa un archivo JSON editable directamente.</li>
+    <li>Redacción de textos y fotografía de stock no están incluidas; se cotizan aparte si hace falta.</li>
+    <li>No se incluye plan de mantenimiento periódico: la página queda diseñada para que HOPE la administre sin depender de un desarrollador. Cualquier cambio futuro (sección nueva, rediseño) se cotiza por separado como un trabajo independiente.</li>
+  </ol>
+  </div>
+
+  <h3>1.2 Definiciones confirmadas con HOPE</h3>
+  <div class="tarjeta-evento">
+  <p class="intro-tabla">Estos puntos quedaron acordados por correo antes de fijar los precios de esta propuesta:</p>
+  <div class="tabla-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Tema</th>
+          <th>Definición acordada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Contenido</td>
+          <td>HOPE suministra textos, logos e infografías.</td>
+        </tr>
+        <tr>
+          <td>Hosting</td>
+          <td>HOPE tiene el dominio, pero aún no el hosting. Contratará un plan Linux básico con cPanel en Colombia Hosting; su costo no hace parte de esta cotización.</td>
+        </tr>
+        <tr>
+          <td>Inscripciones</td>
+          <td>Se mantienen en Microsoft Forms. En cada evento, un botón lleva al formulario correspondiente.</td>
+        </tr>
+        <tr>
+          <td>Estructura</td>
+          <td>Una página principal de 8 secciones (se agrega Apoyo entre pares; los datos de contacto van en el inicio y en el pie) más la página de eventos.</td>
+        </tr>
+        <tr>
+          <td>Botones flotantes</td>
+          <td>Siempre visibles a la derecha de la pantalla. WhatsApp abre el chat con la Línea HOPE; Crisis llama directamente a la Línea HOPE.</td>
+        </tr>
+        <tr>
+          <td>Mantenimiento</td>
+          <td>No se incluye plan periódico. HOPE administra la página por su cuenta; cambios futuros se cotizan aparte.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</section>
+
+<!-- 2. ALCANCE BASE -->
+<section class="seccion">
+  <h2>2. Alcance base (8 secciones)</h2>
+  <div class="tabla-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Sección</th>
+          <th>Contenido clave</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Hero</td>
+          <td>Mensaje principal, datos de contacto (Línea HOPE, correo, horario, Instagram) y botón a WhatsApp</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Qué es HOPE</td>
+          <td>Descripción del programa, enfoque biopsicosocial</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Líneas de atención</td>
+          <td>Salud mental, sueño, uso problemático de sustancias, certificación aeromédica, apoyo entre pares</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Equipo</td>
+          <td>Dra. Johana Giraldo Alzate, Dr. Mateo González Agudelo</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Eventos</td>
+          <td>Bloque resumen (próximos eventos) con botón "Ver todos los eventos" que enlaza a la página <code>eventos.html</code>, donde vive el listado dinámico según el nivel contratado</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Aliados</td>
+          <td>Logos de ACMAE, Avianca, otros aliados</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Apoyo entre pares</td>
+          <td>Presentación del Programa de Apoyo entre Pares de HOPE: qué es, cómo funciona y cómo acceder a él</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Aspectos legales</td>
+          <td>Enlaces desde el pie de página a las páginas de Aviso de Privacidad y si existen, Términos y Condiciones (incluyen identidad del proveedor y cláusula de cookies), enlace al canal de PQRS y enlace a la Superintendencia de Industria y Comercio (SIC)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>Precio base:</strong> <span class="precio-final" data-campo="cifraBase">[CIFRA FINAL]</span></p>
+
+  <div class="incluye-base">
+    <h3>Incluye en todos los casos</h3>
+    <ul>
+      <li><strong>Diseño responsive:</strong> se ve y funciona bien en celular, tablet y escritorio.</li>
+      <li><strong>Optimización básica SEO:</strong> título y meta descripción por página, etiquetas semánticas, imágenes con texto alternativo, Open Graph para que el enlace se vea bien al compartirlo por WhatsApp o redes, <code>sitemap.xml</code> y <code>robots.txt</code>.</li>
+      <li><strong>Botones flotantes</strong> fijos en el lado derecho de la pantalla, visibles siempre en las cuatro páginas del sitio: <strong>WhatsApp</strong> (abre el chat con la Línea HOPE) y <strong>Crisis</strong> (llama directamente a la Línea HOPE: en celular abre el marcador telefónico; en computador muestra el número y la opción de WhatsApp).</li>
+      <li>Pie de página con los datos de contacto (Línea HOPE / WhatsApp +57 601-786-8508, informacion@programahope.com, horario lunes a viernes 8 a.m. a 5 p.m., Instagram @programa.hope) y enlaces a Aviso de Privacidad, si existen Términos y Condiciones, PQRS y la SIC, presente en las cuatro páginas.</li>
+      <li>Página <code>eventos.html</code> con la estructura base del listado (el contenido dinámico depende del nivel contratado).</li>
+      <li>Publicación en el hosting que HOPE contrate (plan Linux básico con cPanel en Colombia Hosting), con certificado HTTPS.</li>
+      <li>1 sesión de capacitación (1 hora).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. CATÁLOGO DE OPCIONES DE EVENTOS -->
+<section class="seccion">
+  <h2>3. Catálogo de opciones de eventos</h2>
+
+  <h3>3.1 Tarjeta mínima de evento</h3>
+  <div class="tarjeta-evento">
+    <h4>Cada evento mostrará:</h4>
+    <ul>
+      <li>Título del evento</li>
+      <li>Fecha y hora</li>
+      <li>Modalidad: Virtual / Presencial / Híbrido</li>
+      <li>Acceso: Abierto / Con inscripción</li>
+      <li>Imagen (flyer)</li>
+      <li>Botón "Inscribirse" → Microsoft Forms, o el formulario que HOPE indique para cada evento (si el evento requiere inscripción)</li>
+      <li>Botón "Unirse" → Google Meet o el enlace de videollamada que HOPE use, <strong>solo si el evento es virtual y de acceso abierto</strong>. Si requiere inscripción, el enlace no se publica en la página: HOPE lo envía a los inscritos (por ejemplo, en el mensaje de confirmación del formulario). No se desarrolla ninguna validación de acceso en la web.</li>
+      <li>Botón "Más información" → WhatsApp con mensaje prellenado</li>
+    </ul>
+    <p><em>Estos campos (incluido <code>acceso</code>) forman parte de la plantilla <code>eventos.json</code> (Nivel B) y de las columnas de la Google Sheet (Nivel C). El listado vive en la página <code>eventos.html</code>; la página principal muestra solo un resumen con los próximos eventos y un botón "Ver todos los eventos".</em></p>
+  </div>
+
+  <div class="nivel-evento">
+    <h3>3.2 Nivel B: Eventos vía JSON en cPanel</h3>
+    <p>HOPE edita un archivo <code>eventos.json</code> desde el administrador de archivos de cPanel. Se entrega:</p>
+    <ul>
+      <li>Plantilla JSON documentada</li>
+      <li>Mini manual paso a paso</li>
+    </ul>
+    <div class="nota-tecnica">
+      <strong>Detalle técnico:</strong> la landing carga el archivo con <code>fetch('eventos.json?v=' + Date.now())</code> (cache-busting) para que el navegador nunca muestre eventos desactualizados.
+    </div>
+    <p><strong>Precio:</strong> <span class="precio-final" data-campo="cifraNivelB">[CIFRA FINAL]</span></p>
+  </div>
+
+  <div class="nivel-evento">
+    <h3>3.3 Nivel C: Eventos vía Google Sheets</h3>
+    <p>La landing lee automáticamente una Google Sheet que HOPE administra: cada fila es un evento. Se entrega:</p>
+    <ul>
+      <li>Plantilla de Google Sheet con columnas predefinidas</li>
+      <li>Mini manual de configuración</li>
+    </ul>
+    <div class="nota-tecnica">
+      <strong>Ruta técnica:</strong> opción principal, Google Sheet publicada en la web como CSV (Archivo > Compartir > Publicar en la web > formato CSV), leída con <code>fetch</code> y parseada en el cliente. Ruta de respaldo si Google restringiera el acceso al CSV publicado: una Google Apps Script vinculada a la misma hoja, publicada como aplicación web, que entrega los eventos en JSON. Ninguna de las dos requiere servidor propio.
+    </div>
+    <p><strong>Precio:</strong> <span class="precio-final" data-campo="cifraNivelC">[CIFRA FINAL]</span></p>
+    <div class="nota-advertencia">
+      <strong>Nota:</strong> Este nivel depende de servicios de Google; si Google cambia su API, puede requerir ajustes futuros.
+    </div>
+    <p class="fallback-mensaje"><strong>Contingencia:</strong> si la consulta falla o Google no responde, esta sección muestra el mensaje "No se pudieron cargar los eventos. Contacta a HOPE al +57 601-786-8508", para que la página nunca quede rota.</p>
+  </div>
+
+  <div class="nivel-evento">
+    <h3>3.4 Extra 1: Estado y archivo automático</h3>
+    <ul>
+      <li>Contador regresivo para eventos próximos</li>
+      <li>Etiquetas automáticas: "Próximo", "Hoy", "Finalizado"</li>
+      <li>Eventos pasados pasan automáticamente a sección "Histórico"</li>
+    </ul>
+    <p><strong>Precio:</strong> <span class="precio-final" data-campo="cifraExtra1">[CIFRA FINAL]</span></p>
+  </div>
+
+  <div class="nivel-evento">
+    <h3>3.5 Extra 2: Eventos pasados con grabación</h3>
+    <p>Galería sencilla de eventos ya realizados. Por cada evento se muestra:</p>
+    <ul>
+      <li>El video de la grabación embebido directamente desde YouTube en modo sin cookies (<code>youtube-nocookie.com</code>), para no generar cookies de terceros (si la grabación está en Google Drive, se muestra como enlace)</li>
+      <li>Fotos del evento</li>
+      <li>Logos de aliados participantes</li>
+    </ul>
+    <p>No incluye reproductor propio, búsqueda ni categorías: es un listado de videos, nada más.</p>
+    <p><strong>Precio:</strong> <span class="precio-final" data-campo="cifraExtra2">[CIFRA FINAL]</span></p>
+  </div>
+
+  <h3>3.6 Tabla "Quién hace qué"</h3>
+  <div class="tabla-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Acción</th>
+          <th class="nowrap">Aplica a</th>
+          <th class="col-centro">Freelancer</th>
+          <th class="col-centro">HOPE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Crear la estructura inicial de eventos y la tarjeta mínima</td>
+          <td>Base</td>
+          <td class="col-centro">X</td>
+          <td class="col-centro"></td>
+        </tr>
+        <tr>
+          <td>Entregar plantilla <code>eventos.json</code> y manual</td>
+          <td>Nivel B</td>
+          <td class="col-centro">X</td>
+          <td class="col-centro"></td>
+        </tr>
+        <tr>
+          <td>Editar <code>eventos.json</code> desde el administrador de archivos de cPanel</td>
+          <td>Nivel B</td>
+          <td class="col-centro"></td>
+          <td class="col-centro">X</td>
+        </tr>
+        <tr>
+          <td>Entregar plantilla de Google Sheet y manual</td>
+          <td>Nivel C</td>
+          <td class="col-centro">X</td>
+          <td class="col-centro"></td>
+        </tr>
+        <tr>
+          <td>Agregar una fila en la Sheet por cada evento nuevo</td>
+          <td>Nivel C</td>
+          <td class="col-centro"></td>
+          <td class="col-centro">X</td>
+        </tr>
+        <tr>
+          <td>Programar contador, etiquetas y archivo automático por fecha</td>
+          <td>Extra 1</td>
+          <td class="col-centro">X</td>
+          <td class="col-centro"></td>
+        </tr>
+        <tr>
+          <td>Mantener el histórico (no requiere acción: es automático)</td>
+          <td>Extra 1</td>
+          <td class="col-centro"></td>
+          <td class="col-centro">(automático)</td>
+        </tr>
+        <tr>
+          <td>Construir la galería de eventos pasados</td>
+          <td>Extra 2</td>
+          <td class="col-centro">X</td>
+          <td class="col-centro"></td>
+        </tr>
+        <tr>
+          <td>Agregar enlace de grabación, fotos y aliados de cada evento realizado</td>
+          <td>Extra 2</td>
+          <td class="col-centro"></td>
+          <td class="col-centro">X</td>
+        </tr>
+        <tr>
+          <td>Capacitación inicial (1 sesión de 1 hora)</td>
+          <td>Base</td>
+          <td class="col-centro">X</td>
+          <td class="col-centro"></td>
+        </tr>
+        <tr>
+          <td>Corrección de errores post-entrega (30 días)</td>
+          <td>Base</td>
+          <td class="col-centro">X</td>
+          <td class="col-centro"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4. TABLA RESUMEN DE PRECIOS -->
+<section class="seccion">
+  <h2>4. Tabla resumen de precios</h2>
+  <div class="tabla-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th class="col-derecha">Precio (COP, sin IVA)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Landing base 8 secciones + despliegue + capacitación</td>
+          <td class="col-derecha"><span data-campo="cifraBase" class="precio-final marcador">[CIFRA FINAL]</span></td>
+        </tr>
+        <tr>
+          <td>Nivel B: JSON en cPanel</td>
+          <td class="col-derecha"><span data-campo="cifraNivelB" class="precio-final marcador">[CIFRA FINAL]</span></td>
+        </tr>
+        <tr>
+          <td>Nivel C: Google Sheets</td>
+          <td class="col-derecha"><span data-campo="cifraNivelC" class="precio-final marcador">[CIFRA FINAL]</span></td>
+        </tr>
+        <tr>
+          <td>Extra 1: Estado y archivo automático</td>
+          <td class="col-derecha"><span data-campo="cifraExtra1" class="precio-final marcador">[CIFRA FINAL]</span></td>
+        </tr>
+        <tr>
+          <td>Extra 2: Eventos pasados con grabación</td>
+          <td class="col-derecha"><span data-campo="cifraExtra2" class="precio-final marcador">[CIFRA FINAL]</span></td>
+        </tr>
+        <tr class="fila-total">
+          <td><strong>Total con Nivel B + ambos extras</strong></td>
+          <td class="col-derecha"><strong><span data-campo="totalNivelB" class="marcador">[TOTAL B]</span></strong></td>
+        </tr>
+        <tr class="fila-total">
+          <td><strong>Total con Nivel C + ambos extras</strong></td>
+          <td class="col-derecha"><strong><span data-campo="totalNivelC" class="marcador">[TOTAL C]</span></strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p><em>Precios en pesos colombianos, sin IVA (régimen simplificado). El Nivel B y el Nivel C son alternativas: se contrata solo uno. Los extras son opcionales: si se elige uno solo o ninguno, el total se reduce en el valor correspondiente.</em></p>
+</section>
+
+<!-- 5. CONDICIONES COMERCIALES -->
+<section class="seccion condiciones">
+  <h2>5. Condiciones comerciales</h2>
+  <ul>
+    <li><strong>Forma de pago:</strong> 50% anticipo para iniciar / 50% contra publicación del sitio.</li>
+    <li><strong>Plazo de entrega:</strong> 3 a 4 semanas a partir de que HOPE entregue el contenido completo.</li>
+    <li><strong>Revisiones incluidas:</strong> 2 rondas de ajustes sobre el diseño.</li>
+    <li><strong>Validez de esta propuesta:</strong> 30 días calendario.</li>
+    <li><strong>Garantía:</strong> 30 días de corrección de errores después de la publicación.</li>
+    <li><strong>Capacitación:</strong> 1 sesión de 1 hora para publicar eventos.</li>
+    <li><strong>IVA:</strong> Precios sin IVA (régimen simplificado).</li>
+  </ul>
+</section>
+
+<!-- 6. CRONOGRAMA -->
+<section class="seccion">
+  <h2>6. Cronograma estimado</h2>
+  <div class="tabla-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Semana</th>
+          <th>Hito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Recepción de contenido + diseño inicial</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Desarrollo de secciones + revisión 1</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Ajustes + sistema de eventos + revisión 2</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Despliegue + capacitación + entrega</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 7. ENTREGABLES -->
+<section class="seccion">
+  <h2>7. Entregables</h2>
+  <ul>
+    <li>Código fuente completo (HTML, CSS, JavaScript): página principal <code>index.html</code>, página de eventos <code>eventos.html</code>, Aviso de Privacidad y si existen, Términos y Condiciones</li>
+    <li>Textos de Aviso de Privacidad y Términos y Condiciones (Ley 1581 de 2012 y Artículo 50 del Estatuto del Consumidor), con la identidad del proveedor y la cláusula de cookies</li>
+    <li>Botones flotantes de WhatsApp y crisis en las cuatro páginas</li>
+    <li>Diseño responsive (celular, tablet, escritorio) y optimización básica SEO (títulos, meta descripción, Open Graph, sitemap)</li>
+    <li>Sitio publicado en el dominio de HOPE con HTTPS</li>
+    <li>Plantilla de eventos (JSON o Google Sheet según nivel contratado)</li>
+    <li>Mini manual de publicación de eventos</li>
+    <li>1 sesión de capacitación (1 hora, virtual o presencial)</li>
+  </ul>
+</section>
+
+<!-- 8. QUIÉN DESARROLLA -->
+<section class="seccion">
+  <h2>8. Quién desarrolla</h2>
+  <p><strong>Enfoque:</strong> Desarrollo web enfocado en simplicidad, rendimiento y autonomía del cliente. El objetivo es que HOPE pueda mantener su página sin depender de un desarrollador.</p>
+
+  <h3>Proceso de trabajo:</h3>
+  <ol>
+    <li>Entendimiento del proyecto y contenido</li>
+    <li>Diseño y prototipo para aprobación</li>
+    <li>Desarrollo iterativo con 2 rondas de revisión</li>
+    <li>Despliegue, capacitación y entrega de documentación</li>
+  </ol>
+
+  <p><strong>Garantía:</strong> 30 días de corrección de cualquier error técnico después de la publicación.</p>
+
+  <div class="nota-advertencia">
+    <p><em>No incluyo trabajos anteriores porque este es mi primer desarrollo web como freelance; me comprometo con un proceso transparente, revisiones acordadas y garantía escrita.</em></p>
+  </div>
+</section>
+
+<!-- 9. PRÓXIMOS PASOS -->
+<section class="seccion">
+  <h2>9. Próximos pasos</h2>
+  <div class="tarjeta-evento">
+  <ol>
+    <li>Revisar esta propuesta y confirmar el nivel de eventos (B o C) y los extras deseados.</li>
+    <li>Aprobar la propuesta y realizar el anticipo del 50%.</li>
+    <li>Entregar el contenido (textos, infografías, fotos y logo).</li>
+    <li>Contratar el plan de hosting en Colombia Hosting (con mi guía) y compartirme el acceso para la publicación.</li>
+    <li>Iniciar el desarrollo.</li>
+  </ol>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="firma">
+  <p>Quedo atento a cualquier duda.</p>
+  <p>Cordialmente,</p>
+  <p><strong><span data-campo="nombreFreelancer" class="marcador">[NOMBRE DEL FREELANCER]</span></strong></p>
+  <p><span data-campo="correo" class="marcador">[CORREO]</span></p>
+  <p><span data-campo="telefono" class="marcador">[TELEFONO]</span></p>
+</section>
+
+<!-- SCRIPT PARA INYECTAR DATOS -->
+<script>
+(function() {
+  // Inyecta los valores de DATOS en los elementos con data-campo
+  if (typeof DATOS !== 'undefined') {
+    document.querySelectorAll('[data-campo]').forEach(function(el) {
+      var campo = el.getAttribute('data-campo');
+      if (DATOS[campo] !== undefined) {
+        el.textContent = DATOS[campo];
+        // Quitar resaltado si el valor ya no es un marcador
+        if (!DATOS[campo].startsWith('[')) {
+          el.classList.remove('marcador');
+        }
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
